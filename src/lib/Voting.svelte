@@ -28,18 +28,31 @@
 
 </script>
 
+<div class="vote">
+    <h1>{voting.name}</h1>
 
-<h1>{voting.name}</h1>
+    {#if permitted}
+    <form>
+    {#each voteList as candidate}
+        <Candidate name={candidate.name} bind:vote={candidate.vote} />
+    {/each}
+    <br>
+        <button {onclick}>Submit</button>
+    </form>
+    {:else}
+    <p>Your voting has been submitted!</p>
+    {/if}
+</div>
 
-{#if permitted}
-<form>
-{#each voteList as candidate}
-    <Candidate name={candidate.name} bind:vote={candidate.vote} />
-{/each}
-<br>
-<input {onclick} type="reset" value="Submit">
-</form>
-{:else}
-<p>Your voting has been submitted!</p>
-{/if}
-
+<style>
+    .vote {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 1em;
+        padding: 1em;
+        border-radius: 1em;
+        border-color: #646cff;
+        border-style: solid;
+        border-width: 1px;
+    }
+</style>
